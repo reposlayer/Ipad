@@ -11,28 +11,28 @@ if (typeof window !== "undefined") {
 
 const projects = [
   {
-    title: "Aurora Digital",
-    slug: "aurora-digital",
-    role: "Engineering / Design",
-    context: "Web Application",
-    year: "2025",
+    title: "Godel Terminal",
+    slug: "godel-terminal",
+    role: "Engineering / API Design",
+    context: "Real-Time Equities API",
+    year: "2024",
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
   },
   {
-    title: "Nexus Architecture",
-    slug: "nexus-architecture",
-    role: "System Architecture",
-    context: "Infrastructure",
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2564&auto=format&fit=crop",
+    title: "Lili CLI",
+    slug: "lili-cli",
+    role: "System Engineering / Tooling",
+    context: "Solana Dev System",
+    year: "2025",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=2564&auto=format&fit=crop",
   },
   {
-    title: "Vertex Engine",
-    slug: "vertex-engine",
-    role: "WebGL / Creative",
-    context: "Interactive Experience",
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2564&auto=format&fit=crop",
+    title: "Outlier",
+    slug: "outlier",
+    role: "Design / Frontend",
+    context: "Digital Interface",
+    year: "2026",
+    image: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?q=80&w=2564&auto=format&fit=crop",
   }
 ];
 

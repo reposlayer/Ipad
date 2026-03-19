@@ -13,25 +13,25 @@ if (typeof window !== "undefined") {
 
 const projects = [
   {
-    title: "Aurora Digital",
-    slug: "aurora-digital",
-    role: "Engineering / Design",
-    context: "Web Application",
-    year: "2025",
-  },
-  {
-    title: "Nexus Architecture",
-    slug: "nexus-architecture",
-    role: "System Architecture",
-    context: "Infrastructure",
+    title: "Godel Terminal",
+    slug: "godel-terminal",
+    role: "Engineering / API Design",
+    context: "Real-Time Equities API",
     year: "2024",
   },
   {
-    title: "Vertex Engine",
-    slug: "vertex-engine",
-    role: "WebGL / Creative",
-    context: "Interactive Experience",
-    year: "2023",
+    title: "Lili CLI",
+    slug: "lili-cli",
+    role: "System Engineering / Tooling",
+    context: "Solana Dev System",
+    year: "2025",
+  },
+  {
+    title: "Outlier",
+    slug: "outlier",
+    role: "Design / Frontend",
+    context: "Digital Interface",
+    year: "2026",
   },
   {
     title: "Project Zenith",
