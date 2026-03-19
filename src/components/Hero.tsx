@@ -17,20 +17,20 @@ export default function Hero() {
 
       tl.fromTo(
         headlineRef.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.5, ease: "power4.out" }
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" }
       )
         .fromTo(
           subheadRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" },
-          "-=1.2"
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+          "-=0.9"
         )
         .fromTo(
           copyRef.current,
           { opacity: 0 },
-          { opacity: 1, duration: 1.5, ease: "power2.out" },
-          "-=0.8"
+          { opacity: 1, duration: 1.2, ease: "power2.out" },
+          "-=0.6"
         );
     }, container);
 
@@ -40,30 +40,33 @@ export default function Hero() {
   return (
     <section 
       ref={container} 
-      className="min-h-screen w-full flex flex-col justify-center items-start px-8 md:px-24 bg-black text-white"
+      className="min-h-screen w-full flex flex-col justify-center items-start px-8 md:px-24 bg-transparent text-white relative border-b border-white/5"
     >
-      <div className="overflow-hidden mb-2">
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.02] blur-[100px] rounded-full pointer-events-none z-0"></div>
+      
+      <div className="relative z-10 overflow-hidden mb-4">
         <h1 
           ref={headlineRef} 
-          className="text-7xl md:text-[10rem] font-bold tracking-tighter leading-none"
+          className="text-7xl md:text-[10rem] font-bold tracking-tighter leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
         >
-          OUTLIER.
+          OUTLIER
         </h1>
       </div>
-      <div className="overflow-hidden mb-12">
+      <div className="relative z-10 overflow-hidden mb-12 flex items-center gap-4">
+        <div className="w-8 h-[1px] bg-white/20"></div>
         <p 
           ref={subheadRef} 
-          className="text-xl md:text-3xl font-light text-zinc-500 tracking-wide uppercase"
+          className="text-lg md:text-xl font-medium tracking-widest uppercase text-zinc-500"
         >
-          by Viktor
+          By Viktor
         </p>
       </div>
 
       <p 
         ref={copyRef} 
-        className="max-w-2xl text-2xl md:text-4xl font-light text-zinc-400 leading-tight"
+        className="relative z-10 max-w-2xl text-xl md:text-3xl font-light text-zinc-400 leading-relaxed"
       >
-        I engineer <span className="text-white font-normal">unfair digital advantages</span>.
+        I build high-performance digital systems designed to outperform.
       </p>
     </section>
   );

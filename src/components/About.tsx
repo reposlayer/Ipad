@@ -17,15 +17,15 @@ export default function About() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         textRef.current,
-        { y: 40, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.5,
+          duration: 1.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: textRef.current,
-            start: "top 80%",
+            start: "top 85%",
           },
         }
       );
@@ -35,16 +35,18 @@ export default function About() {
   }, []);
 
   return (
-    <section className="py-32 px-8 md:px-24 bg-black flex flex-col justify-center min-h-[70vh]">
-      <h2 className="text-zinc-600 font-mono text-sm tracking-widest uppercase mb-12">
-        // About
-      </h2>
-      <p 
-        ref={textRef}
-        className="text-4xl md:text-6xl lg:text-7xl font-light leading-tight text-zinc-400 max-w-5xl"
-      >
-        I am Viktor. I specialize in <span className="text-white font-normal">high-end digital architecture</span>, performance optimization, and building systems that <span className="text-white font-normal">outperform expectations</span>.
-      </p>
+    <section className="py-32 px-8 md:px-24 bg-black flex flex-col justify-center min-h-[50vh]">
+      <div className="max-w-4xl">
+        <h2 className="text-zinc-500 font-medium text-sm tracking-tight mb-8">
+          About
+        </h2>
+        <p 
+          ref={textRef}
+          className="text-2xl md:text-5xl font-medium leading-tight text-white"
+        >
+          I am Viktor. I build high-performance digital products where speed, structure, and design work as one.
+        </p>
+      </div>
     </section>
   );
 }

@@ -16,14 +16,14 @@ export default function Footer() {
 
     const ctx = gsap.context(() => {
       gsap.from(".footer-reveal", {
-        yPercent: 100,
+        y: 20,
         opacity: 0,
         stagger: 0.1,
-        duration: 1.5,
-        ease: "expo.out",
+        duration: 1,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 80%",
+          start: "top 85%",
         },
       });
     }, footerRef);
@@ -34,45 +34,34 @@ export default function Footer() {
   return (
     <footer 
       ref={footerRef}
-      className="relative w-full min-h-screen bg-white text-black flex flex-col justify-between pt-32 pb-8 px-6 md:px-12 overflow-hidden"
+      className="relative w-full bg-black text-white flex flex-col justify-between pt-32 pb-8 px-8 md:px-24 overflow-hidden border-t border-zinc-900"
     >
-      <div className="absolute top-0 left-0 w-full h-8 bg-black" />
-
-      <div className="flex flex-col md:flex-row justify-between items-start gap-16 w-full mt-12 z-10">
-        <div className="max-w-2xl footer-reveal">
-          <p className="text-2xl md:text-4xl font-light tracking-tight leading-snug">
-            We collaborate with ambitious brands to create digital experiences that blend brutalist aesthetics with flawless engineering.
+      <div className="flex flex-col md:flex-row justify-between items-start gap-16 w-full max-w-5xl z-10">
+        <div className="max-w-xl footer-reveal">
+          <p className="text-xl md:text-3xl font-medium tracking-tight leading-snug">
+            Let’s build something that performs.
           </p>
         </div>
 
-        <div className="flex flex-col gap-8 text-lg font-medium footer-reveal">
-          <a href="mailto:hello@prostudio.co" className="hover:line-through transition-all duration-300 transform hover:scale-105 origin-left inline-block">
-            hello@prostudio.co
+        <div className="flex flex-col gap-4 text-sm font-normal footer-reveal text-zinc-400">
+          <a href="mailto:viktor@outlier.co" className="hover:text-white transition-colors">
+            viktor@outlier.co
           </a>
-          <a href="#" className="hover:line-through transition-all duration-300 transform hover:scale-105 origin-left inline-block">
-            Twitter / X
+          <a href="#" className="hover:text-white transition-colors">
+            X (Twitter)
           </a>
-          <a href="#" className="hover:line-through transition-all duration-300 transform hover:scale-105 origin-left inline-block">
-            Instagram
+          <a href="#" className="hover:text-white transition-colors">
+            GitHub
           </a>
         </div>
       </div>
-
-      <div className="w-full flex justify-center items-center flex-1 mt-24 mb-12 footer-reveal mix-blend-difference overflow-hidden">
-        <h2 className="text-[clamp(4rem,20vw,24rem)] font-black uppercase tracking-tighter leading-none m-0 text-white cursor-pointer hover:text-transparent transition-colors duration-500" style={{ WebkitTextStroke: "2px #fff" }}>
-          LET'S TALK
-        </h2>
-      </div>
       
-      <div className="w-full flex flex-col md:flex-row justify-between items-center text-sm font-mono uppercase tracking-widest border-t-4 border-black pt-6 footer-reveal z-10">
-        <p className="font-bold">
-          © {new Date().getFullYear()} PRO STUDIO
+      <div className="w-full flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 font-normal tracking-wide pt-24 footer-reveal max-w-5xl">
+        <p>
+          © {new Date().getFullYear()} OUTLIER by Viktor
         </p>
-        <p className="font-bold hidden md:block text-center flex-grow">
-          DIGITAL EXCELLENCE
-        </p>
-        <p className="font-bold mt-4 md:mt-0">
-          ALL RIGHTS RESERVED
+        <p className="mt-4 md:mt-0">
+          All systems operational.
         </p>
       </div>
     </footer>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -10,25 +11,28 @@ if (typeof window !== "undefined") {
 
 const projects = [
   {
-    title: "AURORA",
-    role: "Direction / WebGL",
-    context: "E-Commerce",
-    year: "2024",
+    title: "Aurora Digital",
+    slug: "aurora-digital",
+    role: "Engineering / Design",
+    context: "Web Application",
+    year: "2025",
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
   },
   {
-    title: "NEBULA",
-    role: "Brand / Interactive",
-    context: "Tech Startup",
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2670&auto=format&fit=crop",
+    title: "Nexus Architecture",
+    slug: "nexus-architecture",
+    role: "System Architecture",
+    context: "Infrastructure",
+    year: "2024",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2564&auto=format&fit=crop",
   },
   {
-    title: "QUANTUM",
-    role: "UX / Development",
-    context: "Fintech App",
+    title: "Vertex Engine",
+    slug: "vertex-engine",
+    role: "WebGL / Creative",
+    context: "Interactive Experience",
     year: "2023",
-    image: "https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2564&auto=format&fit=crop",
   }
 ];
 
@@ -48,7 +52,7 @@ export default function Portfolio() {
 
         if (imageBlock) {
           gsap.to(imageBlock, {
-            yPercent: 20,
+            yPercent: 10,
             ease: "none",
             scrollTrigger: {
               trigger: item,
@@ -61,16 +65,16 @@ export default function Portfolio() {
 
         gsap.fromTo(
           [title, ...meta],
-          { y: 50, opacity: 0 },
+          { y: 20, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1.5,
+            duration: 1,
             stagger: 0.1,
-            ease: "expo.out",
+            ease: "power2.out",
             scrollTrigger: {
               trigger: item,
-              start: "top 80%",
+              start: "top 85%",
             },
           }
         );
@@ -81,51 +85,48 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-32 w-full bg-[#0a0a0a] text-white overflow-hidden">
-      <div className="px-6 md:px-12 border-t border-zinc-800 pt-16 mb-24">
-        <h2 className="text-[clamp(3rem,8vw,10rem)] font-bold uppercase leading-none tracking-tighter mix-blend-difference">
-          Selected <br/>
-          <span className="text-transparent" style={{ WebkitTextStroke: "2px rgba(255,255,255,0.8)" }}>
-            Works
-          </span>
+    <section id="portfolio" ref={containerRef} className="py-24 px-8 md:px-24 w-full bg-black text-white overflow-hidden relative border-t border-white/5">
+      <div className="max-w-5xl relative z-10">
+        <h2 className="text-zinc-500 font-medium text-sm tracking-widest uppercase mb-16">
+          Selected Work
         </h2>
       </div>
 
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full max-w-5xl relative z-10">
         {projects.map((project, index) => (
-          <div key={index} className="portfolio-item relative w-full mb-32 last:mb-0 group">
-            <div className="px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-8 mb-8 z-10 relative pointer-events-none">
-              <h3 className="portfolio-title col-span-1 md:col-span-8 text-[clamp(2.5rem,6vw,8rem)] font-black uppercase tracking-tighter leading-none m-0 group-hover:pl-8 transition-all duration-700 ease-out">
+          <Link href={`/work/${project.slug}`} key={index} className="portfolio-item relative w-full mb-24 last:mb-0 group block p-4 -ml-4 rounded-xl border border-transparent hover:border-white/10 hover:bg-white/[0.02] transition-colors duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-6 z-10 relative">
+              <h3 className="portfolio-title col-span-1 md:col-span-8 text-3xl md:text-5xl font-semibold tracking-tight leading-none m-0 transition-all duration-300 group-hover:text-white text-zinc-300">
                 {project.title}
               </h3>
               
-              <div className="col-span-1 md:col-span-4 flex flex-col justify-end pb-2 gap-4">
-                <div className="grid grid-cols-2 gap-4 font-mono text-xs uppercase tracking-widest text-zinc-400 portfolio-meta">
+              <div className="col-span-1 md:col-span-4 flex flex-col justify-end gap-2">
+                <div className="grid grid-cols-3 gap-4 text-sm font-normal text-zinc-500 portfolio-meta">
                   <div>
-                    <span className="block text-zinc-600 mb-1">Role</span>
+                    <span className="block text-zinc-600 text-xs mb-1">Role</span>
                     {project.role}
                   </div>
                   <div>
-                    <span className="block text-zinc-600 mb-1">Context</span>
+                    <span className="block text-zinc-600 text-xs mb-1">Context</span>
                     {project.context}
                   </div>
-                  <div className="col-span-2 mt-2 pt-4 border-t border-zinc-800">
-                    <span className="block text-zinc-600 mb-1">Year</span>
+                  <div>
+                    <span className="block text-zinc-600 text-xs mb-1">Year</span>
                     {project.year}
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden bg-zinc-900 border-y border-zinc-800">
+            <div className="relative w-full h-[50vh] md:h-[70vh] overflow-hidden bg-zinc-900 border border-white/5 rounded-sm">
               <div 
-                className="parallax-img absolute inset-[-15%] w-[130%] h-[130%] bg-cover bg-center origin-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-out"
+                className="parallax-img absolute inset-[-10%] w-[120%] h-[120%] bg-cover bg-center origin-center opacity-70 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700 ease-out grayscale group-hover:grayscale-0"
                 style={{ backgroundImage: `url(${project.image})` }}
               >
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-700" />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 delay-100" />
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
