@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Creative Agency",
-  description: "Next.js GSAP Portfolio",
+  title: "OUTLIER.",
+  description: "High-end digital architecture and performance optimization.",
 };
 
 export default function RootLayout({

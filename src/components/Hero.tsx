@@ -1,69 +1,70 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import Magnetic from "./Magnetic";
-
-gsap.registerPlugin(useGSAP);
 
 export default function Hero() {
   const container = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadRef = useRef<HTMLParagraphElement>(null);
-  const btnRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLParagraphElement>(null);
 
-  useGSAP(() => {
-    const tl = gsap.timeline();
+  useEffect(() => {
+    if (!container.current) return;
 
-    tl.fromTo(
-      headlineRef.current,
-      { y: 100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" }
-    )
-    .fromTo(
-      subheadRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-      "-=0.8"
-    )
-    .fromTo(
-      btnRef.current,
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7, 0.3)" },
-      "-=0.6"
-    );
-  }, { scope: container });
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+
+      tl.fromTo(
+        headlineRef.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.5, ease: "power4.out" }
+      )
+        .fromTo(
+          subheadRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" },
+          "-=1.2"
+        )
+        .fromTo(
+          copyRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 1.5, ease: "power2.out" },
+          "-=0.8"
+        );
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section 
       ref={container} 
-      className="h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-black text-white relative"
+      className="min-h-screen w-full flex flex-col justify-center items-start px-8 md:px-24 bg-black text-white"
     >
-      <div className="relative overflow-hidden mb-4">
+      <div className="overflow-hidden mb-2">
         <h1 
           ref={headlineRef} 
-          className="text-6xl md:text-9xl font-bold tracking-tighter mix-blend-difference"
+          className="text-7xl md:text-[10rem] font-bold tracking-tighter leading-none"
         >
-          NOTHING.
+          OUTLIER.
         </h1>
       </div>
-      <div className="relative overflow-hidden mb-16">
+      <div className="overflow-hidden mb-12">
         <p 
           ref={subheadRef} 
-          className="text-xl md:text-3xl font-light text-gray-400"
+          className="text-xl md:text-3xl font-light text-zinc-500 tracking-wide uppercase"
         >
-          We create exactly what you need.
+          by Viktor
         </p>
       </div>
 
-      <div ref={btnRef}>
-        <Magnetic>
-          <div className="w-32 h-32 rounded-full border border-white/20 flex flex-col items-center justify-center cursor-pointer hover:bg-white hover:text-black transition-colors duration-300">
-            <span className="text-sm uppercase tracking-widest font-bold">Explore</span>
-          </div>
-        </Magnetic>
-      </div>
+      <p 
+        ref={copyRef} 
+        className="max-w-2xl text-2xl md:text-4xl font-light text-zinc-400 leading-tight"
+      >
+        I engineer <span className="text-white font-normal">unfair digital advantages</span>.
+      </p>
     </section>
   );
 }

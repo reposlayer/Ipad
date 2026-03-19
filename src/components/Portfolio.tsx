@@ -1,77 +1,132 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 const projects = [
-  { id: 1, title: "Neon Dreams", url: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop", speed: 0.1 },
-  { id: 2, title: "Urban Flow", url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop", speed: 0.25 },
-  { id: 3, title: "Abstract Wave", url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop", speed: 0.15 },
+  {
+    title: "AURORA",
+    role: "Direction / WebGL",
+    context: "E-Commerce",
+    year: "2024",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
+  },
+  {
+    title: "NEBULA",
+    role: "Brand / Interactive",
+    context: "Tech Startup",
+    year: "2023",
+    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2670&auto=format&fit=crop",
+  },
+  {
+    title: "QUANTUM",
+    role: "UX / Development",
+    context: "Fintech App",
+    year: "2023",
+    image: "https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=2832&auto=format&fit=crop",
+  }
 ];
 
 export default function Portfolio() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    const images = gsap.utils.toArray(".parallax-img") as HTMLElement[];
-    
-    images.forEach((img) => {
-      const speed = parseFloat(img.dataset.speed || "0.2");
-      
-      gsap.to(img, {
-        y: () => -100 * speed, // Move image up
-        ease: "none",
-        scrollTrigger: {
-          trigger: img.parentElement,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const items = gsap.utils.toArray<HTMLElement>(".portfolio-item");
+
+      items.forEach((item) => {
+        const imageBlock = item.querySelector(".parallax-img");
+        const title = item.querySelector(".portfolio-title");
+        const meta = item.querySelectorAll(".portfolio-meta");
+
+        if (imageBlock) {
+          gsap.to(imageBlock, {
+            yPercent: 20,
+            ease: "none",
+            scrollTrigger: {
+              trigger: item,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+
+        gsap.fromTo(
+          [title, ...meta],
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            stagger: 0.1,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 80%",
+            },
+          }
+        );
       });
-    });
-  }, { scope: containerRef });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section ref={containerRef} className="py-32 w-full bg-black">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-5xl md:text-7xl font-bold text-white mb-24 uppercase tracking-tighter">
-          Selected Works
+    <section ref={containerRef} className="py-32 w-full bg-[#0a0a0a] text-white overflow-hidden">
+      <div className="px-6 md:px-12 border-t border-zinc-800 pt-16 mb-24">
+        <h2 className="text-[clamp(3rem,8vw,10rem)] font-bold uppercase leading-none tracking-tighter mix-blend-difference">
+          Selected <br/>
+          <span className="text-transparent" style={{ WebkitTextStroke: "2px rgba(255,255,255,0.8)" }}>
+            Works
+          </span>
         </h2>
-        
-        <div className="flex flex-col gap-32">
-          {projects.map((project, i) => (
-            <div 
-              key={project.id} 
-              className={`relative w-full md:w-[70%] lg:w-[60%] aspect-[4/3] rounded-3xl overflow-hidden ${
-                i % 2 === 0 ? "self-start" : "self-end"
-              }`}
-            >
-              {/* Parallax Image container */}
-              <div 
-                className="parallax-img absolute w-[100%] h-[130%] top-[-15%] left-0"
-                data-speed={project.speed}
-              >
-                <img 
-                  src={project.url} 
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              {/* Overlay Text */}
-              <div className="absolute inset-0 bg-black/20 flex items-center justify-center pointer-events-none">
-                <h3 className="text-4xl md:text-6xl font-black text-white mix-blend-overlay">
-                  {project.title}
-                </h3>
+      </div>
+
+      <div className="flex flex-col w-full">
+        {projects.map((project, index) => (
+          <div key={index} className="portfolio-item relative w-full mb-32 last:mb-0 group">
+            <div className="px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-8 mb-8 z-10 relative pointer-events-none">
+              <h3 className="portfolio-title col-span-1 md:col-span-8 text-[clamp(2.5rem,6vw,8rem)] font-black uppercase tracking-tighter leading-none m-0 group-hover:pl-8 transition-all duration-700 ease-out">
+                {project.title}
+              </h3>
+              
+              <div className="col-span-1 md:col-span-4 flex flex-col justify-end pb-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 font-mono text-xs uppercase tracking-widest text-zinc-400 portfolio-meta">
+                  <div>
+                    <span className="block text-zinc-600 mb-1">Role</span>
+                    {project.role}
+                  </div>
+                  <div>
+                    <span className="block text-zinc-600 mb-1">Context</span>
+                    {project.context}
+                  </div>
+                  <div className="col-span-2 mt-2 pt-4 border-t border-zinc-800">
+                    <span className="block text-zinc-600 mb-1">Year</span>
+                    {project.year}
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
+
+            <div className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden bg-zinc-900 border-y border-zinc-800">
+              <div 
+                className="parallax-img absolute inset-[-15%] w-[130%] h-[130%] bg-cover bg-center origin-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-out"
+                style={{ backgroundImage: `url(${project.image})` }}
+              >
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-700" />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

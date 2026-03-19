@@ -1,70 +1,86 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 const services = [
-  { id: 1, title: "Web Design", color: "bg-blue-600" },
-  { id: 2, title: "Branding", color: "bg-purple-600" },
-  { id: 3, title: "3D Motion", color: "bg-orange-600" },
-  { id: 4, title: "Copywriting", color: "bg-green-600" },
+  {
+    id: 1,
+    title: "Performance Optimization",
+    description: "Diagnosing and removing bottlenecks. Moving metrics from yellow to green without sacrificing design.",
+    points: ["Core Web Vitals", "React Optimization", "Asset Delivery", "Runtime Profiling"]
+  },
+  {
+    id: 2,
+    title: "Digital Design",
+    description: "Crafting interfaces that demand attention. Relentlessly subtracting the unnecessary.",
+    points: ["Design Systems", "UI/UX Architecture", "Micro-interactions", "Typography"]
+  }
 ];
 
 export default function Services() {
-  const container = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      const panels = gsap.utils.toArray(".panel-item");
-      
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          pin: true,
-          scrub: 1,
-          end: () => "+=" + (wrapperRef.current?.offsetWidth || 0),
-        },
-      });
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-      tl.to(panels, {
-        xPercent: -100 * (panels.length - 1),
-        ease: "none",
+    const ctx = gsap.context(() => {
+      const panels = gsap.utils.toArray<HTMLElement>(".service-panel");
+
+      panels.forEach((panel) => {
+        gsap.fromTo(
+          panel,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: panel,
+              start: "top 85%",
+            },
+          }
+        );
       });
-    },
-    { scope: container }
-  );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section 
-      ref={container} 
-      className="h-screen w-full flex items-center bg-gray-900 overflow-hidden relative"
-    >
-      <div 
-        ref={wrapperRef} 
-        className="w-[400vw] h-full flex flex-nowrap"
-      >
-        {services.map((service, index) => (
-          <div 
-            key={service.id} 
-            className={`panel-item w-screen h-full flex items-center justify-center ${service.color}`}
-          >
-            <div className="text-center">
-              <span className="text-sm font-mono tracking-widest text-white/50 mb-4 block">
-                0{index + 1} //
-              </span>
-              <h2 className="text-6xl md:text-8xl font-black text-white px-4">
+    <section ref={containerRef} className="py-32 px-8 md:px-24 bg-black w-full">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-zinc-600 font-mono text-sm tracking-widest uppercase mb-24">
+          // Expertise
+        </h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+          {services.map((service) => (
+            <div key={service.id} className="service-panel flex flex-col border-t border-zinc-900 pt-12">
+              <h3 className="text-3xl md:text-5xl font-semibold mb-6 text-white tracking-tight">
                 {service.title}
-              </h2>
+              </h3>
+              <p className="text-xl text-zinc-400 font-light mb-12 leading-relaxed">
+                {service.description}
+              </p>
+              
+              <ul className="space-y-4">
+                {service.points.map((point, index) => (
+                  <li key={index} className="flex items-center text-zinc-300 font-light">
+                    <span className="w-1.5 h-1.5 bg-zinc-700 rounded-full mr-4"></span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
