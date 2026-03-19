@@ -22,7 +22,7 @@ export default function Header() {
       className="fixed top-0 left-0 w-full px-8 py-6 flex justify-between items-center mix-blend-difference z-50 text-white"
     >
       <div className="font-semibold text-sm tracking-tight">
-        <Link href="/">OUTLIER<span className="text-zinc-500"> by Viktor</span></Link>
+        <Link href="/">OUTLIER.<span className="text-zinc-500"> by Viktor</span></Link>
       </div>
       <nav className="flex gap-6 text-sm flex-row items-center font-medium">
         <Link href="/services" className="text-zinc-400 hover:text-white transition-colors">Services</Link>

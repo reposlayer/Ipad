@@ -44,7 +44,7 @@ export default function About() {
           ref={textRef}
           className="text-2xl md:text-5xl font-medium leading-tight text-white"
         >
-          I am Viktor. I build high-performance digital products where speed, structure, and design work as one.
+          We build high-performance digital products where speed, structure, and design work as one.
         </p>
       </div>
     </section>

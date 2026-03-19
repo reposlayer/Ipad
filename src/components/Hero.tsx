@@ -49,7 +49,7 @@ export default function Hero() {
           ref={headlineRef} 
           className="text-7xl md:text-[10rem] font-bold tracking-tighter leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
         >
-          OUTLIER
+          OUTLIER.
         </h1>
       </div>
       <div className="relative z-10 overflow-hidden mb-12 flex items-center gap-4">
@@ -62,12 +62,7 @@ export default function Hero() {
         </p>
       </div>
 
-      <p 
-        ref={copyRef} 
-        className="relative z-10 max-w-2xl text-xl md:text-3xl font-light text-zinc-400 leading-relaxed"
-      >
-        I build high-performance digital systems designed to outperform.
-      </p>
+     
     </section>
   );
 }
