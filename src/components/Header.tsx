@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <header 
       ref={headerRef} 
-      className="fixed top-0 left-0 w-full px-8 py-6 flex justify-between items-center mix-blend-difference z-50 text-white"
+      className="fixed top-0 left-0 w-full px-8 py-6 flex justify-between items-center mix-blend-normal md:mix-blend-difference z-50 text-white transform-gpu will-change-transform"
     >
       <div className="font-semibold text-sm tracking-tight">
         <Link href="/">OUTLIER.<span className="text-zinc-500"> by Viktor</span></Link>

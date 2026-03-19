@@ -53,6 +53,8 @@ export default function Portfolio() {
         if (imageBlock) {
           gsap.to(imageBlock, {
             yPercent: 10,
+            force3D: true,
+            rotationZ: 0.01,
             ease: "none",
             scrollTrigger: {
               trigger: item,
@@ -71,6 +73,7 @@ export default function Portfolio() {
             opacity: 1,
             duration: 1,
             stagger: 0.1,
+            force3D: true,
             ease: "power2.out",
             scrollTrigger: {
               trigger: item,

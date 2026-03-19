@@ -18,18 +18,18 @@ export default function Hero() {
       tl.fromTo(
         headlineRef.current,
         { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" }
+        { y: 0, opacity: 1, duration: 1.2, ease: "power4.out", force3D: true }
       )
         .fromTo(
           subheadRef.current,
           { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+          { y: 0, opacity: 1, duration: 1, ease: "power3.out", force3D: true },
           "-=0.9"
         )
         .fromTo(
           copyRef.current,
           { opacity: 0 },
-          { opacity: 1, duration: 1.2, ease: "power2.out" },
+          { opacity: 1, duration: 1.2, ease: "power2.out", force3D: true },
           "-=0.6"
         );
     }, container);
@@ -40,9 +40,9 @@ export default function Hero() {
   return (
     <section 
       ref={container} 
-      className="min-h-screen w-full flex flex-col justify-center items-start px-8 md:px-24 bg-transparent text-white relative border-b border-white/5"
+      className="min-h-screen w-full flex flex-col justify-center items-start px-8 md:px-24 bg-transparent text-white relative border-b border-white/5 transform-gpu"
     >
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.02] blur-[100px] rounded-full pointer-events-none z-0"></div>
+      <div className="hidden md:block absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.02] blur-[100px] rounded-full pointer-events-none z-0 transform-gpu"></div>
       
       <div className="relative z-10 overflow-hidden mb-4">
         <h1 
